@@ -4,7 +4,8 @@ import boto3
 from botocore.exceptions import ClientError
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key_here'  # Change this to a secure random value
+# Change this to a secure random value
+app.secret_key = 'replace_with_a_long_random_secret_key'
 
 UPLOAD_FOLDER = 'uploads'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
@@ -64,11 +65,11 @@ def require_login(f):
 @app.route('/')
 @require_login
 def index():
-    # Will render the main HTML page
     return render_template('index.html')
 
 
 @app.route('/upload', methods=['POST'])
+@require_login
 def upload_file():
     if 'file' not in request.files:
         return jsonify({'success': False, 'error': 'No file part'})
@@ -81,17 +82,20 @@ def upload_file():
 
 
 @app.route('/files', methods=['GET'])
+@require_login
 def list_files():
     files = os.listdir(app.config['UPLOAD_FOLDER'])
     return jsonify({'files': files})
 
 
 @app.route('/download/<filename>', methods=['GET'])
+@require_login
 def download_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename, as_attachment=True)
 
 
 @app.route('/delete/<filename>', methods=['POST'])
+@require_login
 def delete_file(filename):
     file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
     if os.path.exists(file_path):
