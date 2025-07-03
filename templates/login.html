@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS S3 Configuration</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            min-height: 100vh;
+            margin: 0;
+            background: #111;
+            font-family: 'Roboto', Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-container {
+            background: #181818;
+            border-radius: 18px;
+            box-shadow: 0 8px 32px rgba(44, 62, 80, 0.15);
+            max-width: 480px;
+            width: 100%;
+            padding: 36px 32px 28px 32px;
+            margin: 40px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 2px solid #ff9900;
+            border-top: 3px solid #a259ff;
+        }
+
+        h1 {
+            font-weight: 700;
+            font-size: 2rem;
+            margin-bottom: 24px;
+            color: #fff;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+
+        label {
+            color: #fff;
+            font-size: 1rem;
+            margin-bottom: 6px;
+            margin-top: 18px;
+            display: block;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 10px;
+            border: none;
+            background: #222;
+            color: #fff;
+            font-size: 1rem;
+            margin-bottom: 6px;
+            margin-top: 2px;
+            outline: none;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            background: #23233b;
+            border: 1px solid #a259ff;
+        }
+
+        .login-btn {
+            background: #ff9900;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            padding: 14px 0;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 28px;
+            width: 100%;
+            transition: background 0.2s, transform 0.1s;
+        }
+
+        .login-btn:hover {
+            background: #ff7a00;
+            transform: translateY(-2px) scale(1.03);
+        }
+
+        .error {
+            color: #ff4d6d;
+            margin-top: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <form class="login-container" method="post" action="/login">
+        <h1>AWS S3 Configuration</h1>
+        {% if error %}<div class="error">{{ error }}</div>{% endif %}
+        <label for="access_key">Access Key ID:</label>
+        <input type="text" id="access_key" name="access_key" required autocomplete="off">
+        <label for="secret_key">Secret Access Key:</label>
+        <input type="password" id="secret_key" name="secret_key" required autocomplete="off">
+        <label for="region">Region:</label>
+        <input type="text" id="region" name="region" value="us-east-1" required autocomplete="off">
+        <label for="bucket">Bucket Name:</label>
+        <input type="text" id="bucket" name="bucket" required autocomplete="off">
+        <button type="submit" class="login-btn">Connect to S3</button>
+        <a href="/setup"
+            style="display:block; color:#a259ff; text-decoration:none; font-weight:700; font-size:1rem; margin-top:18px; text-align:center;">Need
+            help? Setup instructions</a>
+    </form>
+</body>
+
+</html>
