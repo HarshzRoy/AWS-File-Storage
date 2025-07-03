@@ -60,5 +60,13 @@ A modern, user-friendly web application for uploading, downloading, and managing
 - CORS policy (see Setup Instructions page)
 - IAM permissions: `s3:GetObject`, `s3:PutObject`, `s3:ListBucket`, `s3:DeleteObject`
 
+HEAD
 ## License
 MIT 
+
+
+
+
+
+## License
+MIT
